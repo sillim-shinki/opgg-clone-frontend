@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-chakra-petch);
+  --font-body: var(--font-jakarta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Dark theme (default) ─── */
+:root,
+[data-theme="dark"] {
+  --c-bg-page: #070b11;
+  --c-bg-surface: #0d1421;
+  --c-border: #1e3060;
+  --c-text: #e8e8e8;
+  --c-muted: #5a7ba0;
+  --c-muted-2: #3a5080;
+  --c-muted-3: #2a3e60;
+  --c-dot-grid: rgba(30, 48, 96, 0.48);
+  --c-orb-teal-o: 0.048;
+  --c-orb-gold-o: 0.042;
+  --c-noise-o: 0.022;
+  --c-hex-teal-o: 0.035;
+  --c-hex-gold-o: 0.028;
+  --c-chip-bg: rgba(13, 20, 33, 0.6);
+  --c-chip-hover-border: rgba(10, 200, 185, 0.5);
+  --c-chip-hover-bg: rgba(10, 200, 185, 0.05);
+  --c-toggle-bg: rgba(13, 20, 33, 0.7);
+  --c-toggle-border: #1e3060;
+  --c-toggle-text: #5a7ba0;
+  --c-toggle-hover-text: #0ac8b9;
+}
+
+/* ─── Light theme ─── */
+[data-theme="light"] {
+  --c-bg-page: #eef3fb;
+  --c-bg-surface: #ffffff;
+  --c-border: #bfceea;
+  --c-text: #0d1421;
+  --c-muted: #4a6a90;
+  --c-muted-2: #7a9abb;
+  --c-muted-3: #a8bed6;
+  --c-dot-grid: rgba(90, 130, 190, 0.18);
+  --c-orb-teal-o: 0.14;
+  --c-orb-gold-o: 0.11;
+  --c-noise-o: 0.012;
+  --c-hex-teal-o: 0.14;
+  --c-hex-gold-o: 0.12;
+  --c-chip-bg: rgba(255, 255, 255, 0.75);
+  --c-chip-hover-border: rgba(10, 200, 185, 0.6);
+  --c-chip-hover-bg: rgba(10, 200, 185, 0.08);
+  --c-toggle-bg: rgba(255, 255, 255, 0.75);
+  --c-toggle-border: #bfceea;
+  --c-toggle-text: #4a6a90;
+  --c-toggle-hover-text: #089488;
+}
+
+/* ─── Base ─── */
+body {
+  background-color: var(--c-bg-page);
+  color: var(--c-text);
+  font-family: var(--font-jakarta, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* ─── Search bar placeholder ─── */
+.search-input::placeholder {
+  color: var(--c-muted-2);
+}
+
+/* ─── Trending summoner chip ─── */
+.trend-chip {
+  color: var(--c-muted);
+  border-color: var(--c-border);
+  background: var(--c-chip-bg);
+}
+
+.trend-chip:hover {
+  color: #0ac8b9;
+  border-color: var(--c-chip-hover-border);
+  background: var(--c-chip-hover-bg);
+}
+
+/* ─── Theme transition ─── */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Exclude animated elements from the blanket transition */
+.no-theme-transition,
+.no-theme-transition * {
+  transition: none !important;
+}
+
+/* ─── Animations ─── */
+
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(40px, -30px) scale(1.06);
+  }
+  66% {
+    transform: translate(-25px, 18px) scale(0.95);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  40% {
+    transform: translate(-45px, 22px) scale(1.07);
+  }
+  80% {
+    transform: translate(30px, -35px) scale(0.94);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
